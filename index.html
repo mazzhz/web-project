@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Suomalainen kahvikulttuuri</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+
+<!--========== HEADER ==========-->
+<div id="header-container"></div>
+
+<!----============  NAVBAR ===============-->
+<nav class="navbar navbar-expand-lg ">
+    <div class="container">
+        <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="button-text pull-left">PÄÄVALIKKO</span>
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse"  id="navbarNav">
+            <ul class="navbar-nav text-center">
+                <a id="etusivu" class="btn btn-secondary menu-item active" role="button" href="#" >Etusivu</a>
+                            
+                <div class="menu-item dropdown">
+                <a id="kahvi" class="btn btn-secondary dropdown-toggle menu-item" 
+                href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                kahvikulttuuri
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">tavat ja perinteet</a></li>
+                    <li><a class="dropdown-item" href="#">kahvipöytätarjoilu</a></li>
+                    <li><a class="dropdown-item" href="#">reseptit</a></li>
+                </ul>
+                </div>
+            
+                <a id="kahvilat" class="btn btn-secondary menu-item" role="button" href="#" >Kahvimerkit ja paahtimot</a>
+                <a id="kahvila-kulttuuri" class="btn btn-secondary menu-item" role="button" href="#" >Kahvilat suomessa</a>
+
+                <div class="menu-item dropdown">
+                 <a id="yhteystiedot" class="btn btn-secondary dropdown-toggle menu-item" 
+                    href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    yhteystiedot
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">yhteystiedot</a></li>
+                    <li><a class="dropdown-item" href="#">henkilökunta</a></li>
+                    <li><a class="dropdown-item" href="#">palaute</a></li>
+                    <li><a class="dropdown-item" href="#">UKK</a></li>
+                    <li><a class="dropdown-item" href="#">käyttöehdot</a></li>
+                    <li><a class="dropdown-item" href="#">saavutettavuusseloste</a></li>
+                    <li><a class="dropdown-item" href="#">tietosuojaseloste</a></li>
+                </ul>
+                </div>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+    <!--========== MAIN ==========-->
+
+    <div class="container-fluid">
+        <!--========== HERO-IMAGE ==========-->
+        <div class="hero-section">
+            <div class="hero-image">
+                <img src="assets\img\coffarikahvila.jpg" class="img-fluid" alt="Kahvihetki">
+                <div class="hero-text">
+                    <h1 class=>Suomalainen kahvikulttuuri - nautinto ja yhdessäolo</h1>
+                    <p>Suomi, maa jossa kahvi virtaa lähes tauotta ja jossa kahvipaussi on pyhä hetki. 
+                        Suomalainen kahvikulttuuri on ainutlaatuinen yhdistelmä nautintoa, 
+                        yhdessäoloa ja pitkiä perinteitä. Se on paljon enemmän kuin pelkkä kofeiinipitoinen
+                         juoma; se on osa suomalaista identiteettiä ja elämäntapaa.
+                          Tämä sivusto kutsuu sinut matkalle suomalaisen kahvikulttuurin syvimpään olemukseen,
+                        tutustumaan sen historiaan, sen nykypäivään ja sen monimuotoisiin ilmenemismuotoihin</p>
+                </div>
+            </div>
+        </div>
+
+        <!--========== CONTENT ==========-->
+        <div class="container">
+            <div class="container mt-5 padding2">
+                <div class="row align-items-center">
+                    <!-- Left Text -->
+                    <div class="col-md-6">
+                        <h2>Kahvi - osa meidän tarinaamme</h2>
+                        <p>Kahvi saapui Suomeen 1600-luvulla,
+                            ja siitä lähtien se on vakiinnuttanut asemansa suomalaisten sydämissä.
+                            Aluksi kahvi oli ylellisyyshyödyke, jota vain harvoilla oli varaa nauttia.
+                            Ajan myötä kahvista tuli kuitenkin jokapäiväinen osa suomalaisten elämää,
+                            ja se onkin nykyään yksi Suomen suosituimmista juomista.
+                            Suomalaiset ovat tunnettuja kahvinjuonnistaan, ja meillä onkin maailman
+                            korkeimpia kahvinkulutuksia henkilöä kohden.</p>
+                    </div>
+                    <!-- Right Image -->
+                    <div class="col-md-6">
+                        <img src="assets\img\suomikesatunnelma.jpg" class="img-fluid " alt="Suomalainen maisema">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--========== CARDS ==========-->
+        <div class="container mt-5 padding1">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <img src="assets\img\sharingcoffees.jpg" class="card-img-top" alt="Kahvipöytä">
+                        <div class="card-body">
+                            <h5 class="card-title">Kahvipusseista kulttuuri-ilmiöksi</h5>
+                            <p class="card-text">Kahvipaussi, "kaffe paus" tai tuttavallisemmin "kahvitauko," 
+                                on suomalaisille pyhä hetki. Se on hetki, jolloin pysähdytään hetkeksi arjen kiireestä, 
+                                nautitaan kuppi kuumaa kahvia ja vaihdetaan kuulumisia ystävien, 
+                                perheen tai työkavereiden kanssa. Kahvipausseilla onkin tärkeä sosiaalinen merkitys, 
+                                ja ne ovatkin oiva tapa vahvistaa yhteisöllisyyttä. 
+                                Kahvipausseilla on jopa oma vakiintunut paikkansa työpäivän rytmissä.</p>
+                            <a href="#" class="btn btn-success">Lue lisää kahvikulttuurista</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <img src="assets\img\cottagegirlkahvimoment.jpg" class="card-img-top" alt="Kahvi yhdessä">
+                        <div class="card-body">
+                            <h5 class="card-title">Kahvi maistuu parhaalta yhdessä</h5>
+                            <p class="card-text">Suomalainen kahvikulttuuri on vahvasti sidoksissa yhdessäoloon. 
+                                Kahvihetket ovatkin oivallinen tapa viettää aikaa läheisten kanssa, ja kahvipöydän 
+                                ääressä jaetaankin niin ilot kuin surutkin. Kahvihetki onkin monelle suomalaiselle 
+                                tärkeä osa sosiaalista elämää. Olipa kyseessä sitten aamukahvi perheen kanssa, 
+                                iltapäiväkahvi ystävien kanssa tai kahvitauko työkavereiden kanssa, kahvihetki on 
+                                aina lämmin ja kutsuva hetki.</p>
+                            <a href="#" class="btn btn-success">Lue lisää kahvipöydän herkuista</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--========== PAULING ==========-->
+    <div class="container">
+        <div class="container mt-5">
+            <div class="row align-items-center">
+                <!-- Left Image -->
+                <div class="col-md-6">
+                    <img src="assets\img\pauling logo.jpg" class="img-fluid shadow" alt="Paulig Coffee">
+                </div>
+            
+                <!-- Right Text Section -->
+                <div class="col-md-6">
+                    <h2>Kahvin monimuotoisuus</h2>
+                    <p>
+                        Vaikka suomalaiset ovatkin perinteisesti olleet vahvan kahvin ystäviä, 
+                        kahvikulttuuri on monipuolistunut viime vuosina. 
+                        Yhä useammat suomalaiset ovat löytäneet tiensä erikoiskahvien maailmaan, 
+                        ja tarjolla onkin laaja valikoima erilaisia kahveja, 
+                        niin vaaleapaahtoisia kuin tummapaahtoisiakin. 
+                        Myös erilaiset valmistusmenetelmät, kuten esimerkiksi pressopannu, 
+                        mokkapannu ja erilaiset suodatinmenetelmät, ovat yleistyneet.
+                    </p>
+                    <a href="#" class="btn btn-success">LUE LISÄÄ KAHVIN MONIMUOTOISUUDESTA</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--========== ENDING WORDS ==========-->
+    <div class="container mt-5">
+        <div class="p-4 bg-light text-center" style="box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12)">
+            <h1>Tervetuloa tutustumaan!</h1>
+            <p class="text-start">
+                Tämä sivusto on omistettu suomalaiselle kahvikulttuurille. 
+                Toivomme, että viihdyt sivustollamme ja että opit uutta ja 
+                mielenkiintoista suomalaisesta kahvikulttuurista. 
+                Lähde siis kanssamme matkalle kahvin maailmaan!
+            </p>
+        </div>
+    </div>
+
+    <!--========== FOOTER ==========-->
+    
+    <footer class="custom-footer">
+        <div class="container">
+            <div class="row">
+                <!-- Logo Section -->
+                <div class="col-md-3">
+                    <img src="your-logo.png" alt="Logo" class="footer-logo">
+                </div>
+    
+                <!-- Contact Info -->
+                <div class="col-md-4">
+                    <h5>YHTEYSTIEDOT</h5>
+                    <p>
+                        Marjut Jussila, katuosoite 12 A, 12345 PAIKKA<br>
+                        p. 02 123 123 <br>
+                        marjussi@student.uef.fi
+                    </p>
+                    
+                </div>
+    
+                <!-- About Section -->
+                <div class="col-md-5">
+                    <h5>KAHVIKULTTUURI</h5>
+                    <p>
+                        Suomalainen kahvikulttuuri on ainutlaatuinen yhdistelmä nautintoa, 
+                        yhdessäoloa ja pitkiä perinteitä. Haluamme tällä sivulla jakaa tietoa,
+                        jotta yhä useammalla olisi mahdollisuus tähän ainutlaatuiseen kokemukseen.
+                    </p>
+                </div>
+            </div>
+    
+            <hr>
+    
+            <div class="footer-bottom">
+                <p>Marjut Jussila © | <a href="#">PALAUTE</a> | <a href="#">UUTISKIRJE</a> | 
+                   <a href="#">TIETOSUOJASELOSTE</a> | <a href="#">SAAVUTETTAVUUSSELOSTE</a> | 
+                   <a href="#">KÄYTTÖEHDOT</a></p>
+            </div>
+        </div>
+    </footer>
+    
+
+    <script src="assets\js\loadComponents.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
