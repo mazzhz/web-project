@@ -9,5 +9,6 @@ function loadComponent(id, file) {
 
 document.addEventListener("DOMContentLoaded", function() {
     loadComponent("header-container", "partials/header.html");
-    
+    loadComponent("navbar-container", "partials/navbar.html");
+    loadComponent("footer-container", "partials/footer.html");
 });
