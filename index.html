@@ -1,26 +1,225 @@
 <!DOCTYPE html>
 <html lang="fi">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Suomalainen kahvikulttuuri</title>
     <link rel="stylesheet" href="assets/css/styles.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-<body>
 
-<!--========== HEADER ==========-->
-<div id="header-container"></div>
+<body onload="LoadInitialContent()">
 
-<!----============  NAVBAR ===============-->
-<div id="navbar-container"></div>
+    <!--========== HEADER ==========-->
+    <header class="full-header">
+        <div class="container header-container">
+
+            <div class="row align-items-center">
+                <div class="col-md-6 text-md-start text-center">
+                    <a href="#" class="navbar-brand">
+                        <img src="assets/img/logo.png" alt="Logo" class="img-fluid" width="150">
+                    </a>
+                </div>
+                <!-- Search Bar -->
+                <div class="col-md-6 text-md-end text-center">
+                    <div class="d-flex flex-column">
+                        <div class="language-selection">
+                            <span class="lang active" data-lang="fi">SUOMEKSI</span>
+                            <span class="lang" data-lang="en">IN ENGLISH</span>
+                        </div>
+                        <div class="search-container d-flex">
+                            <input type="text" id="search-input" class="form-control" placeholder="Hae sivustolta">
+                            <button id="hakubtn" class="btn btn-primary" type="button">HAE</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </header>
+
+    <!----============  NAVBAR ===============-->
+    <nav class="navbar navbar-expand-lg ">
+
+        <div class="container">
+            <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="button-text pull-left">PÄÄVALIKKO</span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav text-center">
+                    <a id="etusivu" class="btn btn-secondary menu-item active" role="button" onclick="textChange(0) "
+                        href="#">Etusivu</a>
+
+                    <div class="menu-item dropdown">
+                        <a id="kahvi" class="btn btn-secondary dropdown-toggle menu-item" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            kahvikulttuuri
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" onclick="textChange(1)" href="#">tavat ja perinteet</a></li>
+                            <li><a class="dropdown-item" onclick="textChange(2)" href="#">kahvipöytätarjoilu</a></li>
+                            <li><a class="dropdown-item" onclick="textChange(3)" href="#">reseptit</a></li>
+                        </ul>
+                    </div>
+
+                    <a id="kahvimerkit" class="btn btn-secondary menu-item" role="button" onclick="textChange(4)"
+                        href="#">Kahvimerkit ja paahtimot</a>
+                    <a id="kahvilatSuomessa" class="btn btn-secondary menu-item" role="button" onclick="textChange(5)"
+                        href="#">Kahvilat suomessa</a>
+
+                    <div class="menu-item dropdown">
+                        <a id="yhteystiedot" class="btn btn-secondary dropdown-toggle menu-item" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            yhteystiedot
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="textChange(6) ">yhteystiedot</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="textChange(6) ">henkilökunta</a></li>
+                            <li><a class="dropdown-item" onclick="textChange(6) " href="#">palaute</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="textChange(6) ">UKK</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="textChange(6) ">käyttöehdot</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="textChange(6) ">saavutettavuusseloste</a>
+                            </li>
+                            <li><a class="dropdown-item" href="#" onclick="textChange(6) ">palaute</a></li>
+                        </ul>
+                    </div>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
 
     <!--========== MAIN ==========-->
+
     <div class="container-fluid">
-        <!--========== HERO-IMAGE ==========-->
+
+        <!--========== CONTENT ==========-->
+        <div class="row" id="sisalto">
+
+        </div>
+    </div>
+    <!--========== FOOTER ==========-->
+
+    <footer class="custom-footer">
+        <div class="container">
+            <div class="row">
+                <!-- Logo Section -->
+                <div class="col-md-3">
+                    <img src="your-logo.png" alt="Logo" class="footer-logo">
+                </div>
+
+                <!-- Contact Info -->
+                <div class="col-md-4">
+                    <h5>YHTEYSTIEDOT</h5>
+                    <p>
+                        Marjut Jussila, katuosoite 12 A, 12345 PAIKKA<br>
+                        p. 02 123 123 <br>
+                        marjussi@student.uef.fi
+                    </p>
+
+                </div>
+
+                <!-- About Section -->
+                <div class="col-md-5">
+                    <h5>KAHVIKULTTUURI</h5>
+                    <p>
+                        Suomalainen kahvikulttuuri on ainutlaatuinen yhdistelmä nautintoa,
+                        yhdessäoloa ja pitkiä perinteitä. Haluamme tällä sivulla jakaa tietoa,
+                        jotta yhä useammalla olisi mahdollisuus tähän ainutlaatuiseen kokemukseen.
+                    </p>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="footer-bottom">
+                <p>Marjut Jussila © | <a href="#" onclick="textChange(6)">PALAUTE</a> | <a href="#"
+                        onclick="textChange(6) ">UUTISKIRJE</a> |
+                    <a href="#" onclick="textChange(6) ">TIETOSUOJASELOSTE</a> | <a href="#"
+                        onclick="textChange(6) ">SAAVUTETTAVUUSSELOSTE</a> |
+                    <a href="#" onclick="textChange(6) ">KÄYTTÖEHDOT</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        const menuItems = document.querySelectorAll('.menu-item');
+        let currentActive = document.querySelector('.menu-item.active');
+        const dropdownItems = document.querySelectorAll('.dropdown-item');
+        let currentDropdownActive = document.querySelector('.dropdown-item.active');
+        const toggleItem = document.querySelectorAll('.menu-item.dropdown');
+        let currentToggleActive = document.querySelector('.menu-item.dropdown.active');
+
+        function setActiveButton(newActiveButton) {
+            if (currentActive) {
+                currentActive.classList.remove('active');
+            }
+            newActiveButton.classList.add('active');
+            currentActive = newActiveButton;
+        }
+
+        function setDropdownActive(newActiveDropdown) {
+            if (currentDropdownActive) {
+                currentDropdownActive.classList.remove('active');
+            }
+            newActiveDropdown.classList.add('active');
+            currentDropdownActive = newActiveDropdown;
+
+        }
+
+
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                setActiveButton(item);
+            });
+        });
+        dropdownItems.forEach(item => {
+            item.addEventListener('click', () => {
+                setDropdownActive(item);
+            });
+        });
+
+
+        var textChange = function (index) {
+            if (index == 0) {
+                document.getElementById("sisalto").innerHTML = indexHTML;
+                document.getElementById("BrCr").innerHTML = indexBrCrHTML;
+            }
+            else if (index == 1) {
+                document.getElementById("sisalto").innerHTML = tavat_perinteetHTML;
+                document.getElementById("BrCr").innerHTML = tavat_perinteetBrCrHTML;
+            }
+            else if (index == 2) {
+                document.getElementById("sisalto").innerHTML = kahvitarjoiluHTML;
+                document.getElementById("BrCr").innerHTML = kahvitarjoiluBrCrHTML;
+            }
+            else if (index == 3) {
+                document.getElementById("sisalto").innerHTML = mockupPageHTML;
+                document.getElementById("BrCr").innerHTML = reseptiBrCrHTML;
+            }
+            else if (index == 4) {
+                document.getElementById("sisalto").innerHTML = mockupPageHTML;
+                document.getElementById("BrCr").innerHTML = kahvimerkitjapaahtimotBrCrHTML;
+            }
+            else if (index == 5) {
+                document.getElementById("sisalto").innerHTML = mockupPageHTML;
+                document.getElementById("BrCr").innerHTML = kahvilatBrCrHTML;
+            }
+            else if (index == 6) {
+                document.getElementById("sisalto").innerHTML = mockupPageHTML;
+                document.getElementById("BrCr").innerHTML = mockUpCrHTML;
+            }
+
+        };
+        var indexHTML = `
+    <!--========== HERO-IMAGE ==========-->
         <div class="hero-section">
             <div class="hero-image">
-                <img src="assets\img\coffarikahvila.jpg" class="img-fluid" alt="Kahvihetki">
+                <img src="assets/img/coffarikahvila.jpg" class="img-fluid" alt="Kahvihetki">
                 <div class="hero-text">
                     <h1 class=>Suomalainen kahvikulttuuri - nautinto ja yhdessäolo</h1>
                     <p>Suomi, maa jossa kahvi virtaa lähes tauotta ja jossa kahvipaussi on pyhä hetki. 
@@ -33,8 +232,15 @@
             </div>
         </div>
 
-        <!--========== CONTENT ==========-->
-        <div class="container">
+    <div class="container">
+        <div id="BrCr">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb ">
+                    <li>Olet nyt:&nbsp;</li>
+                    <li class="breadcrumb-item active"aria-current="page">Etusivu</li>
+                </ol>
+            </nav>
+        </div>
             <div class="container mt-5 padding2">
                 <div class="row align-items-center">
                     <!-- Left Text -->
@@ -50,7 +256,7 @@
                     </div>
                     <!-- Right Image -->
                     <div class="col-md-6">
-                        <img src="assets\img\suomikesatunnelma.jpg" class="img-fluid " alt="Suomalainen maisema">
+                        <img src="assets/img/suomikesatunnelma.jpg" class="img-fluid " alt="Suomalainen maisema">
                     </div>
                 </div>
             </div>
@@ -58,10 +264,11 @@
 
         <!--========== CARDS ==========-->
         <div class="container mt-5 padding1">
+        
             <div class="row">
                 <div class="col-md-6">
                     <div class="card">
-                        <img src="assets\img\sharingcoffees.jpg" class="card-img-top" alt="Kahvipöytä">
+                        <img src="assets/img/sharingcoffees.jpg" class="card-img-top" alt="Kahvipöytä">
                         <div class="card-body">
                             <h5 class="card-title">Kahvipusseista kulttuuri-ilmiöksi</h5>
                             <p class="card-text">Kahvipaussi, "kaffe paus" tai tuttavallisemmin "kahvitauko," 
@@ -70,13 +277,13 @@
                                 perheen tai työkavereiden kanssa. Kahvipausseilla onkin tärkeä sosiaalinen merkitys, 
                                 ja ne ovatkin oiva tapa vahvistaa yhteisöllisyyttä. 
                                 Kahvipausseilla on jopa oma vakiintunut paikkansa työpäivän rytmissä.</p>
-                            <a href="#" class="btn btn-success">Lue lisää kahvikulttuurista</a>
+                            <a href="#" class="btn btn-success" onclick="textChange(1)" >Lue lisää kahvikulttuurista</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="card">
-                        <img src="assets\img\cottagegirlkahvimoment.jpg" class="card-img-top" alt="Kahvi yhdessä">
+                        <img src="assets/img/cottagegirlkahvimoment.jpg" class="card-img-top" alt="Kahvi yhdessä">
                         <div class="card-body">
                             <h5 class="card-title">Kahvi maistuu parhaalta yhdessä</h5>
                             <p class="card-text">Suomalainen kahvikulttuuri on vahvasti sidoksissa yhdessäoloon. 
@@ -85,7 +292,7 @@
                                 tärkeä osa sosiaalista elämää. Olipa kyseessä sitten aamukahvi perheen kanssa, 
                                 iltapäiväkahvi ystävien kanssa tai kahvitauko työkavereiden kanssa, kahvihetki on 
                                 aina lämmin ja kutsuva hetki.</p>
-                            <a href="#" class="btn btn-success">Lue lisää kahvipöydän herkuista</a>
+                            <a href="#" class="btn btn-success" onclick="textChange(2)">Lue lisää kahvipöydän herkuista</a>
                         </div>
                     </div>
                 </div>
@@ -98,7 +305,7 @@
             <div class="row align-items-center">
                 <!-- Left Image -->
                 <div class="col-md-6">
-                    <img src="assets\img\pauling logo.jpg" class="img-fluid shadow" alt="Paulig Coffee">
+                    <img src="assets/img/pauling logo.jpg" class="img-fluid shadow" alt="Paulig Coffee">
                 </div>
             
                 <!-- Right Text Section -->
@@ -113,14 +320,14 @@
                         Myös erilaiset valmistusmenetelmät, kuten esimerkiksi pressopannu, 
                         mokkapannu ja erilaiset suodatinmenetelmät, ovat yleistyneet.
                     </p>
-                    <a href="#" class="btn btn-success">LUE LISÄÄ KAHVIN MONIMUOTOISUUDESTA</a>
+                    <a href="#" class="btn btn-success" onclick="textChange(4)">LUE LISÄÄ KAHVIMERKEISTÄ JA PAAHTIMOISTA</a>
                 </div>
             </div>
         </div>
     </div>
     <!--========== ENDING WORDS ==========-->
     <div class="container mt-5">
-        <div class="p-4 bg-light text-center" style="box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12)">
+        <div class="p-4 bg-light text-center" >
             <h1>Tervetuloa tutustumaan!</h1>
             <p class="text-start">
                 Tämä sivusto on omistettu suomalaiselle kahvikulttuurille. 
@@ -129,13 +336,321 @@
                 Lähde siis kanssamme matkalle kahvin maailmaan!
             </p>
         </div>
+    </div>`;
+
+        var tavat_perinteetHTML = `
+        <!-- Hero Section -->
+    <section class="hero-section">
+            <div class="row">
+                <div class="hero-image">
+                    <img src="assets/img/puruja.jpg" class= "img-fluid"alt="puruja">
+                </div>
+            </div>
+
+    </section>
+
+    <!-- Content Section -->
+    <section class="content py-5">
+        
+        <div class="container mt-5 padding2">
+            <div class="row">
+                <div id="BrCr">
+                <nav aria-label="breadcrumb">
+                    
+                </nav>
+            </div>
+
+                <div class="col-12">
+                    <h2 class="fw-bold">Tavat ja perinteet</h2>
+                    <p class="lead">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vulputate velit ipsum, quis consectetur lectus accumsan non. Aliquam ut enim at tortor molestie molestie. Phasellus a lectus at orci hendrerit mollis quis nec enim. Sed lacus lorem, facilisis malesuada bibendum ac, maximus sollicitudin velit. Nam non elit in orci suscipit fermentum. Morbi sed dolor quis dolor tincidunt porta.
+                    </p>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="container content-section">
+                    <div class="row align-items-start">
+                        <!-- Left Text -->
+                        <div class="text-content">
+                            
+                            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vulputate velit ipsum, quis consectetur lectus accumsan non. Aliquam ut enim at tortor molestie molestie. Phasellus a lectus at orci hendrerit mollis quis nec enim. Sed lacus lorem, facilisis malesuada bibendum ac, maximus sollicitudin velit. Nam non elit in orci suscipit fermentum. Morbi sed dolor quis dolor tincidunt porta. Donec convallis aliquet lacus, nec vehicula enim commodo ut. Nullam tristique in lectus non convallis. Vestibulum et magna ligula. Praesent eget semper nunc. Nulla ut quam in mi sodales scelerisque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam ullamcorper fringilla orci eu hendrerit. Integer sodales eget nisi ut ultrices. Nulla facilisi.
+
+                                Fusce malesuada libero non leo imperdiet, in accumsan neque malesuada. Cras nec enim porttitor, lacinia ipsum ut, bibendum nulla. Quisque et dolor nec lorem pretium dapibus. Ut sed dignissim eros. Aenean a scelerisque enim. Integer tempus suscipit metus in elementum. Proin at luctus risus, ut convallis sapien. Fusce magna tellus, feugiat a nisi ut, mollis semper velit. Cras ut ex vitae ex imperdiet egestas. Etiam congue, ipsum id malesuada tincidunt, nisl diam porttitor neque, ac accumsan ipsum ligula a lectus. Suspendisse blandit orci sed nisi accumsan, non pharetra mauris iaculis. Etiam volutpat scelerisque dapibus. Nulla ornare ultricies libero, at suscipit est imperdiet eget.
+                                
+                                Cras finibus aliquam dapibus. Nunc quis arcu auctor, scelerisque tortor dapibus, rutrum leo. Sed tincidunt ipsum at libero bibendum, ut tincidunt magna dapibus. Suspendisse eget accumsan erat, at convallis velit. Fusce sit amet scelerisque leo, a vulputate tellus. Aenean vel velit vehicula, luctus tellus id, condimentum justo. Morbi aliquet magna nec auctor ornare. Curabitur orci eros, sodales nec dolor sit amet, sollicitudin gravida ante. Integer ullamcorper, velit et varius congue, turpis odio tincidunt nulla, et placerat quam lorem nec ex. Nullam odio tortor, suscipit at leo vel, malesuada luctus arcu.
+                                
+                                Maecenas tempor dolor nunc, sed tempus purus euismod at. Etiam sit amet efficitur dui, ut vulputate lacus. Mauris quam mauris, lacinia et metus viverra, vehicula sollicitudin nibh. Nulla eget nisi leo. Aliquam tincidunt nisl a elit aliquet mattis. Nulla quis volutpat ipsum. Integer euismod augue quis arcu lacinia, ultricies pellentesque dui commodo. Maecenas dictum augue nec nisi molestie commodo. 
+                            </p>
+                        </div>
+                        
+                    </div>
+                    <div class="iframe-container">
+                            <iframe src="https://www.youtube.com/embed/MLpWrANjFbI?si=u8duZ0zHfCqcHdMf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </div>
+            <a href="#" class="btn btn-success">Lue lisää asiasta x</a>    
+            </div>
+    </section>
+</div>`;
+
+        var kahvitarjoiluHTML = `<!-- Hero Section -->
+<section class="hero-section">
+    <div class="row">
+        <div class="hero-image">
+            <img src="assets/img/karjalanpiirakka.jpg" class="img-fluid" alt="piirakka">
+        </div>
     </div>
 
-    <!--========== FOOTER ==========-->
-    <div id="footer-container"></div>
-    
+</section>
 
-    <script src="assets\js\loadComponents.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<!-- Content Section -->
+<section class="content py-5">
+
+    <div class="container mt-5 padding2">
+        <div class="row">
+            <div id="BrCr">
+                <nav aria-label="breadcrumb">
+                    
+                </nav>
+            </div>
+
+            <div class="col-12">
+                <h2 class="fw-bold"> Kahvipöytätarjoilu</h2>
+                <p class="lead">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vulputate velit ipsum, quis
+                    consectetur lectus accumsan non. Aliquam ut enim at tortor molestie molestie. Phasellus a lectus at
+                    orci hendrerit mollis quis nec enim. Sed lacus lorem, facilisis malesuada bibendum ac, maximus
+                    sollicitudin velit. Nam non elit in orci suscipit fermentum. Morbi sed dolor quis dolor tincidunt
+                    porta.
+                </p>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="container content-section">
+                <div class="row align-items-start">
+                    <!-- Left Text -->
+                    <div class="text-content">
+
+                        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vulputate velit ipsum, quis
+                            consectetur lectus accumsan non. Aliquam ut enim at tortor molestie molestie. Phasellus a
+                            lectus at orci hendrerit mollis quis nec enim. Sed lacus lorem, facilisis malesuada bibendum
+                            ac, maximus sollicitudin velit. Nam non elit in orci suscipit fermentum. Morbi sed dolor
+                            quis dolor tincidunt porta. Donec convallis aliquet lacus, nec vehicula enim commodo ut.
+                            Nullam tristique in lectus non convallis. Vestibulum et magna ligula. Praesent eget semper
+                            nunc. Nulla ut quam in mi sodales scelerisque. Pellentesque habitant morbi tristique
+                            senectus et netus et malesuada fames ac turpis egestas. Nam ullamcorper fringilla orci eu
+                            hendrerit. Integer sodales eget nisi ut ultrices. Nulla facilisi.
+
+                            Fusce malesuada libero non leo imperdiet, in accumsan neque malesuada. Cras nec enim
+                            porttitor, lacinia ipsum ut, bibendum nulla. Quisque et dolor nec lorem pretium dapibus. Ut
+                            sed dignissim eros. Aenean a scelerisque enim. Integer tempus suscipit metus in elementum.
+                            Proin at luctus risus, ut convallis sapien. Fusce magna tellus, feugiat a nisi ut, mollis
+                            semper velit. Cras ut ex vitae ex imperdiet egestas. Etiam congue, ipsum id malesuada
+                            tincidunt, nisl diam porttitor neque, ac accumsan ipsum ligula a lectus. Suspendisse blandit
+                            orci sed nisi accumsan, non pharetra mauris iaculis. Etiam volutpat scelerisque dapibus.
+                            Nulla ornare ultricies libero, at suscipit est imperdiet eget.
+
+                            Cras finibus aliquam dapibus. Nunc quis arcu auctor, scelerisque tortor dapibus, rutrum leo.
+                            Sed tincidunt ipsum at libero bibendum, ut tincidunt magna dapibus. Suspendisse eget
+                            accumsan erat, at convallis velit. Fusce sit amet scelerisque leo, a vulputate tellus.
+                            Aenean vel velit vehicula, luctus tellus id, condimentum justo. Morbi aliquet magna nec
+                            auctor ornare. Curabitur orci eros, sodales nec dolor sit amet, sollicitudin gravida ante.
+                            Integer ullamcorper, velit et varius congue, turpis odio tincidunt nulla, et placerat quam
+                            lorem nec ex. Nullam odio tortor, suscipit at leo vel, malesuada luctus arcu.
+
+                            Maecenas tempor dolor nunc, sed tempus purus euismod at. Etiam sit amet efficitur dui, ut
+                            vulputate lacus. Mauris quam mauris, lacinia et metus viverra, vehicula sollicitudin nibh.
+                            Nulla eget nisi leo. Aliquam tincidunt nisl a elit aliquet mattis. Nulla quis volutpat
+                            ipsum. Integer euismod augue quis arcu lacinia, ultricies pellentesque dui commodo. Maecenas
+                            dictum augue nec nisi molestie commodo.
+                        </p>
+                    </div>
+
+                </div>
+                <div class="iframe-container">
+                    <iframe src="https://www.youtube.com/embed/MLpWrANjFbI?si=u8duZ0zHfCqcHdMf"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+            <a href="#" class="btn btn-success">Lue lisää asiasta x</a>
+        </div>
+</section>
+</div>`;
+
+        var mockupPageHTML = `
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="row">
+        <div class="hero-image">
+            <img src="assets/img/mockup.jpg" class="img-fluid" alt="piirakka">
+        </div>
+    </div>
+
+</section>
+
+<!-- Content Section -->
+<section class="content py-5">
+
+    <div class="container mt-5 padding2">
+        <div class="row">
+            <div id="BrCr">
+                
+            </div>
+
+            <div class="col-12">
+                <h2 class="fw-bold"> Otsikko 2 - meaningful</h2>
+                <p class="lead">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vulputate velit ipsum, quis
+                    consectetur lectus accumsan non. Aliquam ut enim at tortor molestie molestie. Phasellus a lectus at
+                    orci hendrerit mollis quis nec enim. Sed lacus lorem, facilisis malesuada bibendum ac, maximus
+                    sollicitudin velit. Nam non elit in orci suscipit fermentum. Morbi sed dolor quis dolor tincidunt
+                    porta.
+                </p>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="container content-section">
+                <div class="row align-items-start">
+                    <!-- Left Text -->
+                    <div class="text-content">
+
+                        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vulputate velit ipsum, quis
+                            consectetur lectus accumsan non. Aliquam ut enim at tortor molestie molestie. Phasellus a
+                            lectus at orci hendrerit mollis quis nec enim. Sed lacus lorem, facilisis malesuada bibendum
+                            ac, maximus sollicitudin velit. Nam non elit in orci suscipit fermentum. Morbi sed dolor
+                            quis dolor tincidunt porta. Donec convallis aliquet lacus, nec vehicula enim commodo ut.
+                            Nullam tristique in lectus non convallis. Vestibulum et magna ligula. Praesent eget semper
+                            nunc. Nulla ut quam in mi sodales scelerisque. Pellentesque habitant morbi tristique
+                            senectus et netus et malesuada fames ac turpis egestas. Nam ullamcorper fringilla orci eu
+                            hendrerit. Integer sodales eget nisi ut ultrices. Nulla facilisi.
+
+                            Fusce malesuada libero non leo imperdiet, in accumsan neque malesuada. Cras nec enim
+                            porttitor, lacinia ipsum ut, bibendum nulla. Quisque et dolor nec lorem pretium dapibus. Ut
+                            sed dignissim eros. Aenean a scelerisque enim. Integer tempus suscipit metus in elementum.
+                            Proin at luctus risus, ut convallis sapien. Fusce magna tellus, feugiat a nisi ut, mollis
+                            semper velit. Cras ut ex vitae ex imperdiet egestas. Etiam congue, ipsum id malesuada
+                            tincidunt, nisl diam porttitor neque, ac accumsan ipsum ligula a lectus. Suspendisse blandit
+                            orci sed nisi accumsan, non pharetra mauris iaculis. Etiam volutpat scelerisque dapibus.
+                            Nulla ornare ultricies libero, at suscipit est imperdiet eget.
+
+                            Maecenas tempor dolor nunc, sed tempus purus euismod at. Etiam sit amet efficitur dui, ut
+                            vulputate lacus. Mauris quam mauris, lacinia et metus viverra, vehicula sollicitudin nibh.
+                            Nulla eget nisi leo. Aliquam tincidunt nisl a elit aliquet mattis. Nulla quis volutpat
+                            ipsum. Integer euismod augue quis arcu lacinia, ultricies pellentesque dui commodo. Maecenas
+                            dictum augue nec nisi molestie commodo.
+                        </p>
+                        <h3 class="fw-bold"> Otsikko 3 - meaningful</h3>
+                        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vulputate velit ipsum, quis
+                            consectetur lectus accumsan non. Aliquam ut enim at tortor molestie molestie. Phasellus a
+                            lectus at orci hendrerit mollis quis nec enim. Sed lacus lorem, facilisis malesuada bibendum
+                            ac, maximus sollicitudin velit. Nam non elit in orci suscipit fermentum. Morbi sed dolor
+                            quis dolor tincidunt porta. Donec convallis aliquet lacus, nec vehicula enim commodo ut.
+                            Nullam tristique in lectus non convallis. Vestibulum et magna ligula. Praesent eget semper
+                            nunc. Nulla ut quam in mi sodales scelerisque. Pellentesque habitant morbi tristique
+                            senectus et netus et malesuada fames ac turpis egestas. Nam ullamcorper fringilla orci eu
+                            hendrerit. Integer sodales eget nisi ut ultrices. Nulla facilisi.
+
+                            Fusce malesuada libero non leo imperdiet, in accumsan neque malesuada. Cras nec enim
+                            porttitor, lacinia ipsum ut, bibendum nulla. Quisque et dolor nec lorem pretium dapibus. Ut
+                            sed dignissim eros. Aenean a scelerisque enim. Integer tempus suscipit metus in elementum.
+                            Proin at luctus risus, ut convallis sapien. Fusce magna tellus, feugiat a nisi ut, mollis
+                            semper velit. Cras ut ex vitae ex imperdiet egestas. Etiam congue, ipsum id malesuada
+                            tincidunt, nisl diam porttitor neque, ac accumsan ipsum ligula a lectus. Suspendisse blandit
+                            orci sed nisi accumsan, non pharetra mauris iaculis. Etiam volutpat scelerisque dapibus.
+                            Nulla ornare ultricies libero, at suscipit est imperdiet eget.
+                        </p>    
+
+                    </div>
+
+                </div>
+                <div class="iframe-container">
+                    <iframe src="https://www.youtube.com/embed/MLpWrANjFbI?si=u8duZ0zHfCqcHdMf"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+            <a href="#" class="btn btn-success">Lue lisää asiasta x</a>
+        </div>
+</section>
+</div>`;
+
+        var indexBrCrHTML = `
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li>Olet nyt:&nbsp;</li>
+        <li class="breadcrumb-item active" aria-current="page">Etusivu</li>
+    </ol>
+</nav>`;
+        var tavat_perinteetBrCrHTML = `
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li>Olet nyt:&nbsp;</li>
+        <li class="breadcrumb-item"><a href="#" onclick="textChange(0)">Etusivu</a></li>
+        <li class="breadcrumb-item">Kahvikulttuuri</li>
+        <li class="breadcrumb-item active" aria-current="page">Tavat ja Perinteet</li>
+    </ol>
+</nav>`;
+        var kahvitarjoiluBrCrHTML = `<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li>Olet nyt:&nbsp;</li>
+        <li class="breadcrumb-item"><a href="#" onclick="textChange(0)">Etusivu</a></li>
+        <li class="breadcrumb-item">Kahvikulttuuri</li>
+        <li class="breadcrumb-item active" aria-current="page">Kahvipöytätarjoilu</li>
+    </ol>
+</nav>`;
+
+        var reseptiBrCrHTML = `
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li>Olet nyt:&nbsp;</li>
+        <li class="breadcrumb-item"><a href="#" onclick="textChange(0)">Etusivu</a></li>
+        <li class="breadcrumb-item">Kahvikulttuuri</li>
+        <li class="breadcrumb-item active" aria-current="page">Reseptit</li>
+    </ol>
+</nav>`;
+
+        var kahvimerkitjapaahtimotBrCrHTML = `
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li>Olet nyt:&nbsp;</li>
+        <li class="breadcrumb-item"><a href="#" onclick="textChange(0)">Etusivu</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Kahvimerkit ja paahtimot</li>
+    </ol>
+</nav>`;
+
+        var kahvilatBrCrHTML = `
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li>Olet nyt:&nbsp;</li>
+        <li class="breadcrumb-item"><a href="#" onclick="textChange(0)">Etusivu</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Kahvilat Suomessa</li>
+    </ol>
+</nav>`;
+
+        var mockUpCrHTML = `
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li>Olet nyt:&nbsp;</li>
+        <li class="breadcrumb-item"><a href="#" onclick="textChange(0)">Etusivu</a></li>
+        <li class="breadcrumb-item">mockup1</li>
+        <li class="breadcrumb-item active" aria-current="page">mockup2</li>
+    </ol>
+</nav>`;
+
+
+        function LoadInitialContent() {
+            document.getElementById("sisalto").innerHTML = indexHTML;
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
