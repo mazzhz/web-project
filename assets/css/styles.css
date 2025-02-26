@@ -7,7 +7,7 @@
     --title-color: #232323;
     --text-color: #393939;
     --body-color: #ffffff;
-    --container-color: #FFFDF9;
+    --container-color: #fffdf9;
     --light-brown: #D8CCB3;
     --violet: #37313a;
 
@@ -124,7 +124,7 @@ a {
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: url('../img/bg.png') repeat top left;
+    background: url('../img/bg2.jpg') repeat top left;
 }
 
 h1 {
