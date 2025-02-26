@@ -11,6 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
+<!--add this to body in the end: -->
 
 <body onload="LoadInitialContent()">
 
@@ -62,7 +63,7 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" onclick="textChange(1)" href="#">tavat ja perinteet</a></li>
                             <li><a class="dropdown-item" onclick="textChange(2)" href="#">kahvipöytätarjoilu</a></li>
-                            <li><a class="dropdown-item" onclick="textChange(3)" href="#">reseptit</a></li>
+
                         </ul>
                     </div>
 
@@ -76,24 +77,25 @@
                         href="#">Yhteystiedot
                     </a>
 
-                    
+
                 </ul>
             </div>
 
         </div>
     </nav>
 
+    <!--========== CONTENT ==========-->
+    <!--code snippet for js to work: 
+-->
     <!--========== MAIN ==========-->
 
-    <div class="container-fluid">
+    <div id="sisalto"></div>
 
-        <!--========== CONTENT ==========-->
-        <div class="row" id="sisalto">
 
-        </div>
-    </div>
+
+
+
     <!--========== FOOTER ==========-->
-
     <footer class="custom-footer">
         <div class="container">
             <div class="row">
@@ -127,7 +129,7 @@
             <hr>
 
             <div class="footer-bottom">
-                <p>Marjut Jussila 2025 © 
+                <p>Marjut Jussila 2025 ©
                 </p>
             </div>
         </div>
@@ -137,43 +139,59 @@
     <script>
 
         const menuItems = document.querySelectorAll('.menu-item');
-        let currentActive = document.querySelector('.menu-item.active');
         const dropdownItems = document.querySelectorAll('.dropdown-item');
-        let currentDropdownActive = document.querySelector('.dropdown-item.active');
-        const toggleItem = document.querySelectorAll('.menu-item.dropdown');
-        let currentToggleActive = document.querySelector('.menu-item.dropdown.active');
 
-        function setActiveButton(newActiveButton) {
-            if (currentActive) {
-                currentActive.classList.remove('active');
-            }
-            newActiveButton.classList.add('active');
-            currentActive = newActiveButton;
+        // Helper function: clear active states from all menu and dropdown items
+        function clearNavActive() {
+            document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
+            document.querySelectorAll('.dropdown-item').forEach(item => item.classList.remove('active'));
         }
 
-        function setDropdownActive(newActiveDropdown) {
-            if (currentDropdownActive) {
-                currentDropdownActive.classList.remove('active');
+        // Update navigation active state based on the page index
+        function updateNavActive(index) {
+            clearNavActive();
+            switch (index) {
+                case 0:
+                    // Etusivu
+                    document.getElementById("etusivu").classList.add("active");
+                    break;
+                case 1:
+                    // Dropdown: tavat ja perinteet
+                    document.getElementById("kahvi").classList.add("active"); // parent dropdown toggle
+                    // Assumes the first dropdown-item corresponds to index 1
+                    document.querySelectorAll('.dropdown-item')[0].classList.add("active");
+                    break;
+                case 2:
+                    // Dropdown: kahvipöytätarjoilu
+                    document.getElementById("kahvi").classList.add("active");
+                    document.querySelectorAll('.dropdown-item')[1].classList.add("active");
+                    break;
+                case 3:
+                    // Dropdown: reseptit
+                    document.getElementById("kahvi").classList.add("active");
+                    document.querySelectorAll('.dropdown-item')[2].classList.add("active");
+                    break;
+                case 4:
+                    // Kahvimerkit ja paahtimot
+                    document.getElementById("kahvimerkit").classList.add("active");
+                    break;
+                case 5:
+                    // Kahvilat Suomessa
+                    document.getElementById("kahvilatSuomessa").classList.add("active");
+                    break;
+                case 6:
+                    // Yhteystiedot
+                    document.getElementById("yhteystiedot").classList.add("active");
+                    break;
             }
-            newActiveDropdown.classList.add('active');
-            currentDropdownActive = newActiveDropdown;
-
         }
 
-
-        menuItems.forEach(item => {
-            item.addEventListener('click', () => {
-                setActiveButton(item);
-            });
-        });
-        dropdownItems.forEach(item => {
-            item.addEventListener('click', () => {
-                setDropdownActive(item);
-            });
-        });
-
-
+        // Modified textChange function to update both the content and navigation
         var textChange = function (index) {
+            // Update navigation active state
+            updateNavActive(index);
+
+            // Now load the corresponding content and breadcrumb
             if (index == 0) {
                 document.getElementById("sisalto").innerHTML = indexHTML;
                 document.getElementById("BrCr").innerHTML = indexBrCrHTML;
@@ -185,10 +203,6 @@
             else if (index == 2) {
                 document.getElementById("sisalto").innerHTML = kahvitarjoiluHTML;
                 document.getElementById("BrCr").innerHTML = kahvitarjoiluBrCrHTML;
-            }
-            else if (index == 3) {
-                document.getElementById("sisalto").innerHTML = reseptiHTML;
-                document.getElementById("BrCr").innerHTML = reseptiBrCrHTML;
             }
             else if (index == 4) {
                 document.getElementById("sisalto").innerHTML = kahvimerkitjapaahtimotHTML;
@@ -202,34 +216,65 @@
                 document.getElementById("sisalto").innerHTML = yhteystiedotHTML;
                 document.getElementById("BrCr").innerHTML = yhteystiedotBrCrHTML;
             }
-
         };
+
+        // Example search configuration: each page has an index, title, and array of keywords.
+        const searchPages = [
+            { index: 0, title: "Etusivu", keywords: ["etusivu", "index", "home", "landing"] },
+            { index: 1, title: "Tavat ja perinteet", keywords: ["tavat", "perinteet", "kahvikulttuuri"] },
+            { index: 2, title: "Kahvipöytätarjoilu", keywords: ["kahvipöytä", "tarjoilu", "kahvipöytätarjoilu", "reseptit", "resepti", "recipe"] },
+            { index: 4, title: "Kahvimerkit ja paahtimot", keywords: ["kahvimerkit", "paahtimot", "roastery"] },
+            { index: 5, title: "Kahvilat Suomessa", keywords: ["kahvilat", "suomessa", "cafe", "coffee shop"] },
+            { index: 6, title: "Yhteystiedot", keywords: ["yhteystiedot", "contact", "info"] }
+        ];
+
+        // Listen for click on the search button
+        document.getElementById("hakubtn").addEventListener("click", function () {
+            let query = document.getElementById("search-input").value.toLowerCase().trim();
+            if (query === "") return; // Do nothing if the search query is empty
+
+            // Try to find a page where at least one keyword matches the query
+            let foundPage = searchPages.find(page =>
+                page.keywords.some(keyword => keyword.includes(query) || query.includes(keyword))
+            );
+
+            if (foundPage) {
+                // Load the found page via your textChange function,
+                // which will also update the navigation active state
+                textChange(foundPage.index);
+            } else {
+                // No match found – you could show a message or load a "no results" page.
+                alert("Ei hakutuloksia.");
+            }
+        });
+
+
         var indexHTML = `
-    <!--========== HERO-IMAGE ==========-->
+    <div class="container-fluid">    
         <div class="hero-section">
             <div class="hero-image">
                 <img src="assets/img/coffarikahvila.jpg" class="img-fluid" alt="Kahvihetki">
                 <div class="hero-text">
                     <h1 class=>Suomalainen kahvikulttuuri - nautinto ja yhdessäolo</h1>
-                    <p>Suomi, maa jossa kahvi virtaa lähes tauotta ja jossa kahvipaussi on pyhä hetki. 
-                        Suomalainen kahvikulttuuri on ainutlaatuinen yhdistelmä nautintoa, 
+                    <p>Suomi, maa jossa kahvi virtaa lähes tauotta ja jossa kahvipaussi on pyhä hetki.
+                        Suomalainen kahvikulttuuri on ainutlaatuinen yhdistelmä nautintoa,
                         yhdessäoloa ja pitkiä perinteitä. Se on paljon enemmän kuin pelkkä kofeiinipitoinen
-                         juoma; se on osa suomalaista identiteettiä ja elämäntapaa.
-                          Tämä sivusto kutsuu sinut matkalle suomalaisen kahvikulttuurin syvimpään olemukseen,
+                        juoma; se on osa suomalaista identiteettiä ja elämäntapaa.
+                        Tämä sivusto kutsuu sinut matkalle suomalaisen kahvikulttuurin syvimpään olemukseen,
                         tutustumaan sen historiaan, sen nykypäivään ja sen monimuotoisiin ilmenemismuotoihin</p>
                 </div>
             </div>
         </div>
 
-    <div class="container">
-        <div id="BrCr">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb ">
-                    <li>Olet nyt:&nbsp;</li>
-                    <li class="breadcrumb-item active"aria-current="page">Etusivu</li>
-                </ol>
-            </nav>
-        </div>
+        <div class="container">
+            <div id="BrCr">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb ">
+                        <li>Olet nyt:&nbsp;</li>
+                        <li class="breadcrumb-item active" aria-current="page">Etusivu</li>
+                    </ol>
+                </nav>
+            </div>
             <div class="container mt-5 padding2">
                 <div class="row align-items-center">
                     <!-- Left Text -->
@@ -253,20 +298,20 @@
 
         <!--========== CARDS ==========-->
         <div class="container mt-5 padding1">
-        
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="card">
                         <img src="assets/img/sharingcoffees.jpg" class="card-img-top" alt="Kahvipöytä">
                         <div class="card-body">
                             <h5 class="card-title">Kahvipusseista kulttuuri-ilmiöksi</h5>
-                            <p class="card-text">Kahvipaussi, "kaffe paus" tai tuttavallisemmin "kahvitauko," 
-                                on suomalaisille pyhä hetki. Se on hetki, jolloin pysähdytään hetkeksi arjen kiireestä, 
-                                nautitaan kuppi kuumaa kahvia ja vaihdetaan kuulumisia ystävien, 
-                                perheen tai työkavereiden kanssa. Kahvipausseilla onkin tärkeä sosiaalinen merkitys, 
-                                ja ne ovatkin oiva tapa vahvistaa yhteisöllisyyttä. 
+                            <p class="card-text">Kahvipaussi, "kaffe paus" tai tuttavallisemmin "kahvitauko,"
+                                on suomalaisille pyhä hetki. Se on hetki, jolloin pysähdytään hetkeksi arjen kiireestä,
+                                nautitaan kuppi kuumaa kahvia ja vaihdetaan kuulumisia ystävien,
+                                perheen tai työkavereiden kanssa. Kahvipausseilla onkin tärkeä sosiaalinen merkitys,
+                                ja ne ovatkin oiva tapa vahvistaa yhteisöllisyyttä.
                                 Kahvipausseilla on jopa oma vakiintunut paikkansa työpäivän rytmissä.</p>
-                            <a href="#" class="btn btn-success" onclick="textChange(1)" >Lue lisää kahvikulttuurista</a>
+                            <a href="#" class="btn btn-success" onclick="textChange(1)">Lue lisää kahvikulttuurista</a>
                         </div>
                     </div>
                 </div>
@@ -275,13 +320,14 @@
                         <img src="assets/img/cottagegirlkahvimoment.jpg" class="card-img-top" alt="Kahvi yhdessä">
                         <div class="card-body">
                             <h5 class="card-title">Kahvi maistuu parhaalta yhdessä</h5>
-                            <p class="card-text">Suomalainen kahvikulttuuri on vahvasti sidoksissa yhdessäoloon. 
-                                Kahvihetket ovatkin oivallinen tapa viettää aikaa läheisten kanssa, ja kahvipöydän 
-                                ääressä jaetaankin niin ilot kuin surutkin. Kahvihetki onkin monelle suomalaiselle 
-                                tärkeä osa sosiaalista elämää. Olipa kyseessä sitten aamukahvi perheen kanssa, 
-                                iltapäiväkahvi ystävien kanssa tai kahvitauko työkavereiden kanssa, kahvihetki on 
+                            <p class="card-text">Suomalainen kahvikulttuuri on vahvasti sidoksissa yhdessäoloon.
+                                Kahvihetket ovatkin oivallinen tapa viettää aikaa läheisten kanssa, ja kahvipöydän
+                                ääressä jaetaankin niin ilot kuin surutkin. Kahvihetki onkin monelle suomalaiselle
+                                tärkeä osa sosiaalista elämää. Olipa kyseessä sitten aamukahvi perheen kanssa,
+                                iltapäiväkahvi ystävien kanssa tai kahvitauko työkavereiden kanssa, kahvihetki on
                                 aina lämmin ja kutsuva hetki.</p>
-                            <a href="#" class="btn btn-success" onclick="textChange(2)">Lue lisää kahvipöydän herkuista</a>
+                            <a href="#" class="btn btn-success" onclick="textChange(2)">Lue lisää kahvipöydän
+                                herkuista</a>
                         </div>
                     </div>
                 </div>
@@ -296,297 +342,376 @@
                 <div class="col-md-6">
                     <img src="assets/img/pauling logo.jpg" class="img-fluid shadow" alt="Paulig Coffee">
                 </div>
-            
+
                 <!-- Right Text Section -->
                 <div class="col-md-6">
                     <h2>Kahvin monimuotoisuus</h2>
                     <p>
-                        Vaikka suomalaiset ovatkin perinteisesti olleet vahvan kahvin ystäviä, 
-                        kahvikulttuuri on monipuolistunut viime vuosina. 
-                        Yhä useammat suomalaiset ovat löytäneet tiensä erikoiskahvien maailmaan, 
-                        ja tarjolla onkin laaja valikoima erilaisia kahveja, 
-                        niin vaaleapaahtoisia kuin tummapaahtoisiakin. 
-                        Myös erilaiset valmistusmenetelmät, kuten esimerkiksi pressopannu, 
+                        Vaikka suomalaiset ovatkin perinteisesti olleet vahvan kahvin ystäviä,
+                        kahvikulttuuri on monipuolistunut viime vuosina.
+                        Yhä useammat suomalaiset ovat löytäneet tiensä erikoiskahvien maailmaan,
+                        ja tarjolla onkin laaja valikoima erilaisia kahveja,
+                        niin vaaleapaahtoisia kuin tummapaahtoisiakin.
+                        Myös erilaiset valmistusmenetelmät, kuten esimerkiksi pressopannu,
                         mokkapannu ja erilaiset suodatinmenetelmät, ovat yleistyneet.
                     </p>
-                    <a href="#" class="btn btn-success" onclick="textChange(4)">LUE LISÄÄ KAHVIMERKEISTÄ JA PAAHTIMOISTA</a>
+                    <a href="#" class="btn btn-success" onclick="textChange(4)">LUE LISÄÄ KAHVIMERKEISTÄ JA
+                        PAAHTIMOISTA
+                    </a>
                 </div>
             </div>
         </div>
     </div>
     <!--========== ENDING WORDS ==========-->
-    <div class="container mt-5">
-        <div class="p-4 bg-light text-center" >
-            <h1>Tervetuloa tutustumaan!</h1>
-            <p class="text-start">
-                Tämä sivusto on omistettu suomalaiselle kahvikulttuurille. 
-                Toivomme, että viihdyt sivustollamme ja että opit uutta ja 
-                mielenkiintoista suomalaisesta kahvikulttuurista. 
-                Lähde siis kanssamme matkalle kahvin maailmaan!
-            </p>
+    <div class="container-fluid">
+        <div class="container mt-5 padding2">
+            <div class="p-4 text-center">
+                <h1>Kahvilat Suomessa: Makujen ja tunnelmien kohtaamispaikkoja</h1>
+                <p class="text-start">
+                    Suomalaiset kahvilat ovat paljon enemmän kuin paikkoja, joissa nautitaan kuppi kahvia. 
+                    Ne ovat kohtaamispaikkoja, joissa ystävät ja perheet kokoontuvat, 
+                    työkaverit vaihtavat kuulumisia ja yksinäiset sielut löytävät hetken rauhaa. 
+                    Suomessa kahvilakulttuuri on rikas ja monimuotoinen, ja jokaiselle löytyy varmasti oma suosikkipaikka. 
+                </p>
+                <p class="text-start">
+                    Tule mukaan tutustumaan suomalaisiin kahviloihin! 
+                    Sivustoltamme löydät tietoa suosituimmista kahviloista eri puolilla Suomea.
+                     Voit tutustua kahviloiden tarjontaan, tunnelmaan ja sijaintiin. 
+                    Lähde virtuaaliselle kahvilakierrokselle ja löydä uusia suosikkipaikkoja! 
+                </p>
+                <p><a href="#" class="btn btn-success" onclick="textChange(5)">Lue lisää kahviloista Suomessa</a>
+                
+                
+            </div>
         </div>
-    </div>`;
+    </div>
+    `;
 
         var tavat_perinteetHTML = `
+        <div class="container-fluid">
         <!-- Hero Section -->
-    <section class="hero-section">
+        <section class="hero-section">
             <div class="row">
                 <div class="hero-image">
-                    <img src="assets/img/puruja.jpg" class= "img-fluid"alt="puruja">
+                    <img src="assets/img/puruja.jpg" class="img-fluid" alt="puruja">
                 </div>
             </div>
 
-    </section>
+        </section>
 
-    <!-- Content Section -->
-    <section class="content py-5">
-        
-        <div class="container mt-5 padding2">
-            <div class="row">
-                <div id="BrCr">
-                <nav aria-label="breadcrumb">
-                    
-                </nav>
-            </div>
+        <!-- Content Section -->
+        <section class="content py-5">
 
-                <div class="col-12">
-                    <h2 class="fw-bold">Tavat ja perinteet</h2>
-                    <p class="lead">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vulputate velit ipsum, quis consectetur lectus accumsan non. Aliquam ut enim at tortor molestie molestie. Phasellus a lectus at orci hendrerit mollis quis nec enim. Sed lacus lorem, facilisis malesuada bibendum ac, maximus sollicitudin velit. Nam non elit in orci suscipit fermentum. Morbi sed dolor quis dolor tincidunt porta.
-                    </p>
-                </div>
-            </div>
+            <div class="container mt-5 padding2">
+                <div class="row">
+                    <div id="BrCr">
+                        <nav aria-label="breadcrumb">
 
-            <div class="container">
-                <div class="container content-section">
-                    <div class="row align-items-start">
-                        <!-- Left Text -->
-                        <div class="text-content">
-                            
-                            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vulputate velit ipsum, quis consectetur lectus accumsan non. Aliquam ut enim at tortor molestie molestie. Phasellus a lectus at orci hendrerit mollis quis nec enim. Sed lacus lorem, facilisis malesuada bibendum ac, maximus sollicitudin velit. Nam non elit in orci suscipit fermentum. Morbi sed dolor quis dolor tincidunt porta. Donec convallis aliquet lacus, nec vehicula enim commodo ut. Nullam tristique in lectus non convallis. Vestibulum et magna ligula. Praesent eget semper nunc. Nulla ut quam in mi sodales scelerisque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam ullamcorper fringilla orci eu hendrerit. Integer sodales eget nisi ut ultrices. Nulla facilisi.
-
-                                Fusce malesuada libero non leo imperdiet, in accumsan neque malesuada. Cras nec enim porttitor, lacinia ipsum ut, bibendum nulla. Quisque et dolor nec lorem pretium dapibus. Ut sed dignissim eros. Aenean a scelerisque enim. Integer tempus suscipit metus in elementum. Proin at luctus risus, ut convallis sapien. Fusce magna tellus, feugiat a nisi ut, mollis semper velit. Cras ut ex vitae ex imperdiet egestas. Etiam congue, ipsum id malesuada tincidunt, nisl diam porttitor neque, ac accumsan ipsum ligula a lectus. Suspendisse blandit orci sed nisi accumsan, non pharetra mauris iaculis. Etiam volutpat scelerisque dapibus. Nulla ornare ultricies libero, at suscipit est imperdiet eget.
-                                
-                                Cras finibus aliquam dapibus. Nunc quis arcu auctor, scelerisque tortor dapibus, rutrum leo. Sed tincidunt ipsum at libero bibendum, ut tincidunt magna dapibus. Suspendisse eget accumsan erat, at convallis velit. Fusce sit amet scelerisque leo, a vulputate tellus. Aenean vel velit vehicula, luctus tellus id, condimentum justo. Morbi aliquet magna nec auctor ornare. Curabitur orci eros, sodales nec dolor sit amet, sollicitudin gravida ante. Integer ullamcorper, velit et varius congue, turpis odio tincidunt nulla, et placerat quam lorem nec ex. Nullam odio tortor, suscipit at leo vel, malesuada luctus arcu.
-                                
-                                Maecenas tempor dolor nunc, sed tempus purus euismod at. Etiam sit amet efficitur dui, ut vulputate lacus. Mauris quam mauris, lacinia et metus viverra, vehicula sollicitudin nibh. Nulla eget nisi leo. Aliquam tincidunt nisl a elit aliquet mattis. Nulla quis volutpat ipsum. Integer euismod augue quis arcu lacinia, ultricies pellentesque dui commodo. Maecenas dictum augue nec nisi molestie commodo. 
-                            </p>
-                        </div>
-                        
+                        </nav>
                     </div>
-                    <div class="iframe-container">
-                            <iframe src="https://www.youtube.com/embed/MLpWrANjFbI?si=u8duZ0zHfCqcHdMf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-                </div>
-            <a href="#" class="btn btn-success">Lue lisää asiasta x</a>    
-            </div>
-    </section>
-</div>`;
 
-        var kahvitarjoiluHTML = `<!-- Hero Section -->
-<section class="hero-section">
-    <div class="row">
-        <div class="hero-image">
-            <img src="assets/img/karjalanpiirakka.jpg" class="img-fluid" alt="piirakka">
-        </div>
-    </div>
-
-</section>
-
-<!-- Content Section -->
-<section class="content py-5">
-
-    <div class="container mt-5 padding2">
-        <div class="row">
-            <div id="BrCr">
-                <nav aria-label="breadcrumb">
-                    
-                </nav>
-            </div>
-
-            <div class="col-12">
-                <h2 class="fw-bold"> Kahvipöytätarjoilu</h2>
-                <p class="lead">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vulputate velit ipsum, quis
-                    consectetur lectus accumsan non. Aliquam ut enim at tortor molestie molestie. Phasellus a lectus at
-                    orci hendrerit mollis quis nec enim. Sed lacus lorem, facilisis malesuada bibendum ac, maximus
-                    sollicitudin velit. Nam non elit in orci suscipit fermentum. Morbi sed dolor quis dolor tincidunt
-                    porta.
-                </p>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="container content-section">
-                <div class="row align-items-start">
-                    <!-- Left Text -->
-                    <div class="text-content">
-
-                        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vulputate velit ipsum, quis
-                            consectetur lectus accumsan non. Aliquam ut enim at tortor molestie molestie. Phasellus a
-                            lectus at orci hendrerit mollis quis nec enim. Sed lacus lorem, facilisis malesuada bibendum
-                            ac, maximus sollicitudin velit. Nam non elit in orci suscipit fermentum. Morbi sed dolor
-                            quis dolor tincidunt porta. Donec convallis aliquet lacus, nec vehicula enim commodo ut.
-                            Nullam tristique in lectus non convallis. Vestibulum et magna ligula. Praesent eget semper
-                            nunc. Nulla ut quam in mi sodales scelerisque. Pellentesque habitant morbi tristique
-                            senectus et netus et malesuada fames ac turpis egestas. Nam ullamcorper fringilla orci eu
-                            hendrerit. Integer sodales eget nisi ut ultrices. Nulla facilisi.
-
-                            Fusce malesuada libero non leo imperdiet, in accumsan neque malesuada. Cras nec enim
-                            porttitor, lacinia ipsum ut, bibendum nulla. Quisque et dolor nec lorem pretium dapibus. Ut
-                            sed dignissim eros. Aenean a scelerisque enim. Integer tempus suscipit metus in elementum.
-                            Proin at luctus risus, ut convallis sapien. Fusce magna tellus, feugiat a nisi ut, mollis
-                            semper velit. Cras ut ex vitae ex imperdiet egestas. Etiam congue, ipsum id malesuada
-                            tincidunt, nisl diam porttitor neque, ac accumsan ipsum ligula a lectus. Suspendisse blandit
-                            orci sed nisi accumsan, non pharetra mauris iaculis. Etiam volutpat scelerisque dapibus.
-                            Nulla ornare ultricies libero, at suscipit est imperdiet eget.
-
-                            Cras finibus aliquam dapibus. Nunc quis arcu auctor, scelerisque tortor dapibus, rutrum leo.
-                            Sed tincidunt ipsum at libero bibendum, ut tincidunt magna dapibus. Suspendisse eget
-                            accumsan erat, at convallis velit. Fusce sit amet scelerisque leo, a vulputate tellus.
-                            Aenean vel velit vehicula, luctus tellus id, condimentum justo. Morbi aliquet magna nec
-                            auctor ornare. Curabitur orci eros, sodales nec dolor sit amet, sollicitudin gravida ante.
-                            Integer ullamcorper, velit et varius congue, turpis odio tincidunt nulla, et placerat quam
-                            lorem nec ex. Nullam odio tortor, suscipit at leo vel, malesuada luctus arcu.
-
-                            Maecenas tempor dolor nunc, sed tempus purus euismod at. Etiam sit amet efficitur dui, ut
-                            vulputate lacus. Mauris quam mauris, lacinia et metus viverra, vehicula sollicitudin nibh.
-                            Nulla eget nisi leo. Aliquam tincidunt nisl a elit aliquet mattis. Nulla quis volutpat
-                            ipsum. Integer euismod augue quis arcu lacinia, ultricies pellentesque dui commodo. Maecenas
-                            dictum augue nec nisi molestie commodo.
+                    <div class="col-12">
+                        <h2 class="fw-bold">Tavat ja perinteet</h2>
+                        <p class="lead">
+                            Suomalainen kahvikulttuuri on ainutlaatuinen yhdistelmä perinteitä ja modernia nautintoa.
+                            Tältä sivulta löydät tietoa suomalaisen kahvinjuonnin tavoista, perinteistä ja siitä, miten
+                            kahvi on muovannut suomalaista yhteiskuntaa.
                         </p>
                     </div>
-
                 </div>
-                <div class="iframe-container">
-                    <iframe src="https://www.youtube.com/embed/MLpWrANjFbI?si=u8duZ0zHfCqcHdMf"
-                        title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                </div>
-            </div>
-            <a href="#" class="btn btn-success">Lue lisää asiasta x</a>
-        </div>
-</section>
-</div>`;
 
+                <div class="container">
+                    <div class="container content-section">
+                        <div class="align-items-start">
+                            <!-- Left Text -->
+                            <section>
+                                <h3>Kahvipaussi – pyhä hetki arjen keskellä</h3>
+                                <p>Kahvitauko, eli "kaffe paus", on suomalaisille lähes pyhä hetki. Työpäivän tai arjen
+                                    kiireen keskellä pysähdytään nauttimaan kuppi kuumaa kahvia ja vaihtamaan
+                                    kuulumisia. Kahvipaussi on enemmän kuin pelkkä tauko; se on sosiaalinen rituaali,
+                                    joka vahvistaa yhteisöllisyyttä ja luo yhteenkuuluvuuden tunnetta. Kahvipaussilla on
+                                    vakiintunut paikkansa niin työpaikoilla kuin kotona, ja se on olennainen osa
+                                    suomalaista elämäntapaa.</p>
+                            </section>
 
-var kahvimerkitjapaahtimotHTML = `
+                            <section>
+                                <h4>Kahvi osana vieraanvaraisuutta</h4>
+                                <p>Suomalaisessa kulttuurissa on tapana tarjota vieraille kahvia. Kahvihetki on luonteva
+                                    tapa luoda rento ja kotoisa tunnelma. Kahvihetken ympärille rakentuu usein
+                                    keskustelua ja yhdessäoloa, ja se on erinomainen tapa tutustua uusiin ihmisiin tai
+                                    viettää aikaa ystävien ja perheen kanssa.</p>
+                                <p class="fw-bold"> Alla video suodatinkahvin valmistuksesta:</p>    
+                            </section>
 
-<!-- Hero Section -->
-<section class="hero-section">
-    <div class="row">
-        <div class="hero-image">
-            <img src="assets/img/roastery2.jpg" class="img-fluid" alt="roastery">
-        </div>
-    </div>
-
-</section>
-
-<!-- Content Section -->
-<section class="content py-5">
-
-    <div class="container mt-5 padding2">
-        <div class="row">
-            <div id="BrCr">
-                
-            </div>
-
-            <div class="col-12">
-                <h2 class="fw-bold"> Kahvimerkit ja paahtimot</h2>
-                <p class="lead">
-                    Suomalaiset kahvimerkit ja paahtimot tunnetaan korkeasta laadustaan ja ainutlaatuisista makuelämyksistään. 
-                    Tältä sivulta löydät kattavan esittelyn alan parhaista toimijoista.
-                </p>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="container content-section">
-                <div class="row align-items-start">
-                    <!-- Left Text -->
-                    <div class="text-content">
-
-                        <h3>Suomalaiset kahvimerkit ja paahtimot: Makujen monimuotoisuus</h3>
-
-                        <p>Suomessa kahvi ei ole vain juoma, vaan osa kulttuuria ja perinteitä. Maamme on tunnettu korkeasta kahvinkulutuksestaan, ja tämä näkyy myös monipuolisessa kahvimerkkien ja paahtimoiden kirjossa. Olitpa sitten perinteisen tummapaahtoisen kahvin ystävä tai erikoiskahvien hienostunut nautiskelija, Suomesta löydät varmasti oman suosikkisi.</p>
-                    
-                        <h4>Perinteiset suosikit:</h4>
-                    
-                        <p>Suomalaisessa kahvihyllyssä komeilevat tutut ja rakastetut merkit, jotka ovat tarjonneet kahvinautintoja sukupolvelta toiselle. Näitä ovat muun muassa:</p>
-                    </div>
-                        <div class="col-md-8 align-items-start">
-                        <ul>
-                          <li><strong>Paulig:</strong> Suomen suurin kahvipaahtimo, jonka valikoimasta löytyy niin perinteisiä kuin modernejakin kahveja.</li>
-                          <li><strong>Meira:</strong> Toinen suuri suomalainen kahvipaahtimo, joka tunnetaan laadukkaista ja monipuolisista kahveistaan.</li>
-                          <li><strong>Kulta Katriina:</strong> Klassikko, joka on monen suomalaisen aamukahvin perusta.</li>
-                        </ul>
+                            <div class="iframe-container">
+                                <iframe width="560" height="315"
+                                    src="https://www.youtube.com/embed/i5tjemmH8dQ?si=UFzQjXPSDG8_ZfWw"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <section>
+                                <h2>Juhlapyhien kahviherkut</h2>
+                                <p>Suomalaiset yhdistävät kahvihetket usein erilaisiin juhlapyhiin ja tapahtumiin.
+                                    Vappuna nautitaan perinteisesti simaa ja tippaleipiä kahvin kera, jouluna
+                                    kahvipöytään katetaan runsaasti jouluherkkuja, kuten piparkakkuja ja joulutorttuja,
+                                    ja pääsiäisenä kahvipöydässä tarjoillaan mämmiä ja pashaa.
+                                </p>
+                            </section>
                         </div>
-                        <div class="col-md-4 justify-content-end">
-                            <div class="image-placeholder">
-                            <img src="assets/img/juhlamokka.png" class="img-fluid" alt="Placeholder Image">
+                    </div>
+                </div>
+                <a href="#" onclick="textChange(2)" class="btn btn-success">Lue lisää kahvipöytätarjoilusta</a>
+            </div>
+        </section>
+    </div>
+        `;
+
+        var kahvitarjoiluHTML = `
+         <div class="container-fluid">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="row">
+                <div class="hero-image">
+                    <img src="assets/img/karjalanpiirakka.jpg" class="img-fluid" alt="piirakka">
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Content Section -->
+        <section class="content py-5">
+
+            <div class="container mt-5 padding2">
+                <div class="row">
+                    <div id="BrCr">
+                        <nav aria-label="breadcrumb">
+
+                        </nav>
+                    </div>
+
+                    <div class="col-12">
+                        <h2 class="fw-bold"> Kahvipöytätarjoilu – suomalaisen juhlan sydän</h2>
+                        <p class="lead">
+                            Suomalainen kahvipöytä on kattaus, joka kertoo vieraalle lämmöstä ja vieraanvaraisuudesta.
+                            Tältä sivulta löydät tietoa perinteisistä kahvipöytätarjoiluista, vinkkejä onnistuneeseen
+                            kahvihetkeen sekä suosittuja reseptejä kahvipöydän herkuiksi.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="container content-section">
+                        <div class="row align-items-start">
+                            <!-- Left Text -->
+
+                            <div class="col-md-8 align-items-start">
+                                <h2>Perinteiset kahvipöydän herkut</h2>
+                                <ul>
+                                    <li><strong>Pulla:</strong> Erityisesti korvapuustit ja voisilmäpullat ovat
+                                        suomalaisten suosikkeja.</li>
+                                    <li><strong>Kakut:</strong> Marja- ja kermakakut, kuivakakut sekä täytekakut
+                                        kuuluvat juhlapöydän vakiovarustukseen.</li>
+                                    <li><strong>Pikkuleivät:</strong> Erilaiset pikkuleivät, kuten piparkakut,
+                                        joulutortut ja lusikkaleivät, tuovat kahvipöytään vaihtelua.</li>
+                                    <li><strong>Suolaiset piirakat:</strong> Savulohi- tai kinkkupiirakka tuovat
+                                        kahvipöytään suolaista vastapainoa makeille herkuille.</li>
+                                    <li><strong>Karjalanpiirakat:</strong> Munavoin kanssa tarjoiltuna karjalanpiirakat
+                                        ovat suomalaisten suosikki.</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4 justify-content-end">
+                                <div class="image-placeholder">
+                                    <img src="assets/img/kakku.jpg" class="img-fluid" alt="Placeholder Image">
+                                </div>
+                            </div>
+                            <div class="text-content">
+
+
+                                <section>
+                                    <h2>Vinkkejä onnistuneeseen kahvipöytään</h2>
+                                    <ul>
+                                        <li><strong>Valmistele ajoissa:</strong> Leivo osa herkuista etukäteen ja
+                                            pakasta ne. Näin säästät aikaa juhlapäivänä.</li>
+                                        <li><strong>Huomioi vieraiden erityisruokavaliot:</strong> Tarjoa
+                                            gluteenittomia, laktoosittomia tai vegaanisia vaihtoehtoja.</li>
+                                        <li><strong>Panosta kattaukseen:</strong> Kauniit astiat, servietit ja
+                                            pöytäliina luovat juhlavan tunnelman.</li>
+                                        <li><strong>Tarjoile kahvi oikeassa lämpötilassa:</strong> Kahvi maistuu
+                                            parhaalta, kun se on kuumaa.</li>
+                                        <li><strong>Muista myös muut juomat:</strong> Tarjoa kahvin lisäksi teetä, mehua
+                                            ja vettä.</li>
+                                    </ul>
+                                </section>
+
+                                <section>
+                                    <h3>Reseptivinkkejä</h3>
+                                    <ul>
+                                        <li><a href="#">Korvapuustien resepti</a></li>
+                                        <li><a href="#">Marjakakun resepti</a></li>
+                                        <li><a href="#">Savulohipiirakan resepti</a></li>
+                                        <li><a href="#">Karjalanpiirakoiden resepti</a></li>
+                                    </ul>
+                                </section>
+
                             </div>
                         </div>
-                    <div class="text-content">
-                        
-                        <h4>Erikoiskahvien maailma:</h4>
-                    
-                        <p>Viime vuosina Suomeen on syntynyt lukuisia pieniä paahtimoita, jotka ovat erikoistuneet laadukkaisiin erikoiskahveihin. Nämä paahtimot tuovat kahvipöytään uusia makuja ja tuoksuja, ja ne panostavat kahvin alkuperään, kestävyyteen ja laatuun.</p>
-                    
-                        <ul>
-                          <li><strong>Helsingin Kahvipaahtimo:</strong> Tunnettu laadukkaista ja vastuullisesti tuotetuista erikoiskahveistaan.</li>
-                          <li><strong>Turun Kahvipaahtimo:</strong> Tarjoaa laajan valikoiman erilaisia erikoiskahveja ja järjestää myös kahvikoulutuksia.</li>
-                          <li><strong>Lehmus Roastery:</strong> Useasti palkittu pieni paahtimo, joka on erikoistunut erikoiskahveihin.</li>
-                        </ul>
-
-                        <div class="d-flex justify-content-center gap-3 mt-3">
-                        <a class="btn btn-success" href="https://www.helsinginkahvipaahtimo.fi/">Linkki Helsingin Kahvipaahtimon sivuille</a>
-                        <a class="btn btn-success" href="https://www.turunkahvipaahtimo.fi/">Linkki Turun Kahvipaahtimon sivuille</a>
-                        <a class="btn btn-success" href="https://lehmusroastery.com/">Linkki Lehmus Roasteryn sivuille</a>
+                        <h4>Muita hyödyllisiä linkkejä:</h4>
+                        <div class="buttonrows gap-3 mt-3">
+                            <a href="https://www.kinuskikissa.fi/" class="btn btn-success"> Kinuskikissa</a>
+                            <p> Suuri valikoima leivontareseptejä</p>
                         </div>
-                        <p></p>
-                    
-                        <h4>Paahtimon valinta:</h4>
-                    
-                        <p>Kahvin makuun vaikuttavat monet tekijät, kuten kahvipapujen alkuperä, paahtoaste ja valmistustapa. Eri paahtimot käyttävät erilaisia paahtoprofiileja, mikä luo kahveihin omanlaisensa makumaailman.</p>
-                    
-                        <ul>
-                          <li><strong>Vaalea paahto:</strong> Korostaa kahvin hapokkuutta ja hedelmäisiä aromeja.</li>
-                          <li><strong>Keskipaahto:</strong> Tasapainoinen vaihtoehto, jossa yhdistyvät hapokkuus ja makeus.</li>
-                          <li><strong>Tumma paahto:</strong> Tuo esiin kahvin tummat suklaan ja pähkinän aromit.</li>
-                        </ul>
+                        <div class="buttonrows gap-3 mt-3">
+                            <a href="https://www.valio.fi/reseptihaku/" class="btn btn-success"> valio reseptit</a>
+                            <p> Reseptejä niin leivonnaisiin kuin suomalaisiin ruokiin</p>
+                        </div>
                     </div>
-
-                    <div class="iframe-container">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/rqBsvtP990I?si=oLCKvQlrMLk9merg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-
-                    <div class="text-content">
-                        <h4>Tutustu ja löydä omat suosikkisi:</h4>
-                    
-                        <p>Suomalainen kahvikulttuuri on rikas ja monimuotoinen, ja jokaisella on mahdollisuus löytää oma suosikkinsa. Tutustu rohkeasti eri kahvimerkkeihin ja paahtimoihin, ja löydä juuri sinun makusi mukainen kahvi.</p>
-                    
-                        <p><a class="btn btn-success" href="https://paulig.com/fi/">Linkki Pauligin sivuille</a>   <a class="btn btn-success" href="https://meira.fi/">Linkki Meiran sivuille</a>
-                        
-                        
-                    </div>
-
-                    
-
                 </div>
-                
+        </section>
+    </div>`;
+
+        var kahvimerkitjapaahtimotHTML = `
+    <div class="container-fluid">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="row">
+                <div class="hero-image">
+                    <img src="assets/img/roastery2.jpg" class="img-fluid" alt="roastery">
+                </div>
             </div>
-            
-        </div>
-</section>
-</div>
+
+        </section>
+
+        <!-- Content Section -->
+        <section class="content py-5">
+
+            <div class="container mt-5 padding2">
+                <div class="row">
+                    <div id="BrCr">
+
+                    </div>
+
+                    <div class="col-12">
+                        <h2 class="fw-bold"> Kahvimerkit ja paahtimot</h2>
+                        <p class="lead">
+                            Suomalaiset kahvimerkit ja paahtimot tunnetaan korkeasta laadustaan ja ainutlaatuisista
+                            makuelämyksistään.
+                            Tältä sivulta löydät kattavan esittelyn alan parhaista toimijoista.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="container content-section">
+                        <div class="row align-items-start">
+                            <!-- Left Text -->
+                            <div class="text-content">
+
+                                <h3>Suomalaiset kahvimerkit ja paahtimot: Makujen monimuotoisuus</h3>
+
+                                <p>Suomessa kahvi ei ole vain juoma, vaan osa kulttuuria ja perinteitä. Maamme on
+                                    tunnettu korkeasta kahvinkulutuksestaan, ja tämä näkyy myös monipuolisessa
+                                    kahvimerkkien ja paahtimoiden kirjossa. Olitpa sitten perinteisen tummapaahtoisen
+                                    kahvin ystävä tai erikoiskahvien hienostunut nautiskelija, Suomesta löydät varmasti
+                                    oman suosikkisi.</p>
+
+                                <h4>Perinteiset suosikit:</h4>
+
+                                <p>Suomalaisessa kahvihyllyssä komeilevat tutut ja rakastetut merkit, jotka ovat
+                                    tarjonneet kahvinautintoja sukupolvelta toiselle. Näitä ovat muun muassa:</p>
+                            </div>
+                            <div class="col-md-8 align-items-start">
+                                <ul>
+                                    <li><strong>Paulig:</strong> Suomen suurin kahvipaahtimo, jonka valikoimasta löytyy
+                                        niin perinteisiä kuin modernejakin kahveja.</li>
+                                    <li><strong>Meira:</strong> Toinen suuri suomalainen kahvipaahtimo, joka tunnetaan
+                                        laadukkaista ja monipuolisista kahveistaan.</li>
+                                    <li><strong>Kulta Katriina:</strong> Klassikko, joka on monen suomalaisen aamukahvin
+                                        perusta.</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4 justify-content-end">
+                                <div class="image-placeholder">
+                                    <img src="assets/img/juhlamokka.png" class="img-fluid" alt="Placeholder Image">
+                                </div>
+                            </div>
+                            <div class="text-content">
+
+                                <h4>Erikoiskahvien maailma:</h4>
+
+                                <p>Viime vuosina Suomeen on syntynyt lukuisia pieniä paahtimoita, jotka ovat
+                                    erikoistuneet laadukkaisiin erikoiskahveihin. Nämä paahtimot tuovat kahvipöytään
+                                    uusia makuja ja tuoksuja, ja ne panostavat kahvin alkuperään, kestävyyteen ja
+                                    laatuun.</p>
+
+                                <ul>
+                                    <li><strong>Helsingin Kahvipaahtimo:</strong> Tunnettu laadukkaista ja
+                                        vastuullisesti tuotetuista erikoiskahveistaan.</li>
+                                    <li><strong>Turun Kahvipaahtimo:</strong> Tarjoaa laajan valikoiman erilaisia
+                                        erikoiskahveja ja järjestää myös kahvikoulutuksia.</li>
+                                    <li><strong>Lehmus Roastery:</strong> Useasti palkittu pieni paahtimo, joka on
+                                        erikoistunut erikoiskahveihin.</li>
+                                </ul>
+                            </div>
+                            <div class="buttonrows justify-content-center gap-3 mt-3">
+                                <a class="btn btn-success" href="https://www.helsinginkahvipaahtimo.fi/">Linkki
+                                    Helsingin Kahvipaahtimon sivuille</a>
+                                <a class="btn btn-success" href="https://www.turunkahvipaahtimo.fi/">Linkki Turun
+                                    Kahvipaahtimon sivuille</a>
+                                <a class="btn btn-success" href="https://lehmusroastery.com/">Linkki Lehmus Roasteryn
+                                    sivuille</a>
+                            </div>
+                            <p></p>
+                            <div class="text-content">
+                                <h4>Paahtimon valinta:</h4>
+
+                                <p>Kahvin makuun vaikuttavat monet tekijät, kuten kahvipapujen alkuperä, paahtoaste ja
+                                    valmistustapa. Eri paahtimot käyttävät erilaisia paahtoprofiileja, mikä luo
+                                    kahveihin omanlaisensa makumaailman.</p>
+
+                                <ul>
+                                    <li><strong>Vaalea paahto:</strong> Korostaa kahvin hapokkuutta ja hedelmäisiä
+                                        aromeja.</li>
+                                    <li><strong>Keskipaahto:</strong> Tasapainoinen vaihtoehto, jossa yhdistyvät
+                                        hapokkuus ja makeus.</li>
+                                    <li><strong>Tumma paahto:</strong> Tuo esiin kahvin tummat suklaan ja pähkinän
+                                        aromit.</li>
+                                </ul>
+                            </div>
+
+                            <div class="iframe-container">
+                                <iframe width="560" height="315"
+                                    src="https://www.youtube.com/embed/rqBsvtP990I?si=oLCKvQlrMLk9merg"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+
+                            <div class="text-content">
+                                <h4>Tutustu ja löydä omat suosikkisi:</h4>
+
+                                <p>Suomalainen kahvikulttuuri on rikas ja monimuotoinen, ja jokaisella on mahdollisuus
+                                    löytää oma suosikkinsa. Tutustu rohkeasti eri kahvimerkkeihin ja paahtimoihin, ja
+                                    löydä juuri sinun makusi mukainen kahvi.</p>
+                            </div>
+
+                            <div class="buttonrows gap-3">
+                                <a class="btn btn-success" href="https://paulig.com/fi/">Linkki Pauligin sivuille</a>
+                                <a class="btn btn-success" href="https://meira.fi/">Linkki Meiran sivuille</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+        </section>
+    </div>
 
 `;
 
-var kahvilatHTML = ``;
-var kahvitarjoiluHTML = ``;
-var reseptiHTML = ``;
-var yhteystiedotHTML = ``;
+        var kahvilatHTML = ``;
+
+
+        var yhteystiedotHTML = ``;
 
 
         var indexBrCrHTML = `
