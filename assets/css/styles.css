@@ -110,13 +110,16 @@
 
     }
 
-   
 
-    
+
+
 }
-a  {
-        color: var(--violet) !important;
-      }
+
+a {
+    color: var(--violet) !important;
+}
+
+
 
 body {
     margin: 0;
@@ -159,9 +162,10 @@ h1 {
 
 #hakubtn {
     margin-left: 1%;
-    background-color: #662287 !important;
-  border-color: var(--violet) !important;
-  color: #fff; /* Ensures the text remains readable */
+    background-color: #582c6e !important;
+    border-color: var(--violet) !important;
+    color: #fff;
+    /* Ensures the text remains readable */
 }
 
 
