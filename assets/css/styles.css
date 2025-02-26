@@ -141,7 +141,7 @@ h1 {
 /*============  Header ===============*/
 .full-header {
     background-color: var(--light-brown);
-    
+    padding-bottom: 2%;
     border-bottom: #d4c9af 2px solid;
 }
 
