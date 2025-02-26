@@ -1,5 +1,3 @@
-<script>import { kahvimerkitjapaahtimotHTML } from ".pages/merkit-paahtimot.js";</script>
-
 <!DOCTYPE html>
 <html lang="fi">
 
@@ -11,7 +9,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-<!--add this to body in the end: -->
 
 <body onload="LoadInitialContent()">
 
@@ -21,17 +18,14 @@
 
             <div class="row align-items-center">
                 <div class="col-md-6 text-md-start text-center">
-                    <a href="#" class="navbar-brand">
-                        <img src="assets/img/logo.png" alt="Logo" class="img-fluid" width="150">
+                    <a href="#" onclick="textChange(0)" class="navbar-brand">
+                        <img src="assets/img/logo.png" alt="Logo" class="img-fluid" >
                     </a>
                 </div>
                 <!-- Search Bar -->
                 <div class="col-md-6 text-md-end text-center">
                     <div class="d-flex flex-column">
-                        <div class="language-selection">
-                            <span class="lang active" data-lang="fi">SUOMEKSI</span>
-                            <span class="lang" data-lang="en">IN ENGLISH</span>
-                        </div>
+                        
                         <div class="search-container d-flex">
                             <input type="text" id="search-input" class="form-control" placeholder="Hae sivustolta">
                             <button id="hakubtn" class="btn btn-primary" type="button">HAE</button>
@@ -85,32 +79,29 @@
     </nav>
 
     <!--========== CONTENT ==========-->
-    <!--code snippet for js to work: 
--->
-    <!--========== MAIN ==========-->
 
-    <div id="sisalto"></div>
+    <div id="sisalto">
 
-
-
-
-
+    </div>
     <!--========== FOOTER ==========-->
     <footer class="custom-footer">
         <div class="container">
             <div class="row">
                 <!-- Logo Section -->
                 <div class="col-md-3">
-                    <img src="your-logo.png" alt="Logo" class="footer-logo">
+                    <a href="#"onclick="textChange(1)">
+                    <img src="assets\img\logo.png" alt="Logo" class="footer-logo"></a>
                 </div>
 
                 <!-- Contact Info -->
-                <div class="col-md-4">
+                <div class="col-md-4" >
                     <h5>YHTEYSTIEDOT</h5>
                     <p>
-                        Marjut Jussila, katuosoite 12 A, 12345 PAIKKA<br>
+                        Marjut Jussila<br>
+                        Katuosoite 12 A, <br>
+                        00000 PAIKKAKUNTA <br>
                         p. 02 123 123 <br>
-                        marjussi@student.uef.fi
+                        kehittäjä@sähköposti.fi
                     </p>
 
                 </div>
@@ -216,6 +207,10 @@
                 document.getElementById("sisalto").innerHTML = yhteystiedotHTML;
                 document.getElementById("BrCr").innerHTML = yhteystiedotBrCrHTML;
             }
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         };
 
         // Example search configuration: each page has an index, title, and array of keywords.
@@ -247,6 +242,9 @@
                 alert("Ei hakutuloksia.");
             }
         });
+
+
+        
 
 
         var indexHTML = `
@@ -366,7 +364,7 @@
     <div class="container-fluid">
         <div class="container mt-5 padding2">
             <div class="p-4 text-center">
-                <h1>Kahvilat Suomessa: Makujen ja tunnelmien kohtaamispaikkoja</h1>
+                <h2>Kahvilat Suomessa - Makujen ja tunnelmien kohtaamispaikkoja</h2>
                 <p class="text-start">
                     Suomalaiset kahvilat ovat paljon enemmän kuin paikkoja, joissa nautitaan kuppi kahvia. 
                     Ne ovat kohtaamispaikkoja, joissa ystävät ja perheet kokoontuvat, 
@@ -544,19 +542,10 @@
                                     </ul>
                                 </section>
 
-                                <section>
-                                    <h3>Reseptivinkkejä</h3>
-                                    <ul>
-                                        <li><a href="#">Korvapuustien resepti</a></li>
-                                        <li><a href="#">Marjakakun resepti</a></li>
-                                        <li><a href="#">Savulohipiirakan resepti</a></li>
-                                        <li><a href="#">Karjalanpiirakoiden resepti</a></li>
-                                    </ul>
-                                </section>
 
                             </div>
                         </div>
-                        <h4>Muita hyödyllisiä linkkejä:</h4>
+                        <h4>hyödyllisiä linkkejä resepteihin:</h4>
                         <div class="buttonrows gap-3 mt-3">
                             <a href="https://www.kinuskikissa.fi/" class="btn btn-success"> Kinuskikissa</a>
                             <p> Suuri valikoima leivontareseptejä</p>
@@ -708,10 +697,163 @@
 
 `;
 
-        var kahvilatHTML = ``;
+        var kahvilatHTML = `
+        <div class="container-fluid">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="row">
+                <div class="hero-image">
+                    <img src="assets/img/map_toycar.jpg" class="img-fluid" alt="map">
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Content Section -->
+        <section class="content py-5">
+
+            <div class="container mt-5 padding2">
+                <div class="row">
+                    <div id="BrCr">
+                        <nav aria-label="breadcrumb">
+
+                        </nav>
+                    </div>
+
+                    <div class="col-12">
+                        <h2 class="fw-bold"> Kahvilat Suomessa – kohtaamispaikkoja ja herkkuja</h2>
+                        <p class="lead">
+                            Suomalaiset kahvilat ovat paljon enemmän kuin paikkoja, joissa nautitaan kuppi kahvia. Ne
+                            ovat kohtaamispaikkoja, joissa ystävät ja perheet kokoontuvat, työkaverit vaihtavat
+                            kuulumisia ja yksinäiset sielut löytävät hetken rauhaa. Suomessa kahvilakulttuuri on rikas
+                            ja monipuolinen, ja jokaiselle löytyy varmasti oma suosikkipaikkansa.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="container content-section">
+                        <div class="row align-items-start">
+                            <div class="text-content">
+                                <section>
+                                    <p>Suomessa on pitkät perinteet kahviloista. Perinteiset kahvilat, joissa
+                                        tarjoillaan suodatinkahvia ja pullaa, ovat edelleen suosittuja. Viime vuosina
+                                        Suomeen on kuitenkin syntynyt myös lukuisia moderneja kahvibaareja, jotka
+                                        tarjoavat laajan valikoiman erikoiskahveja ja trendikkäitä herkkuja.</p>
+                                </section>
+
+                                <section>
+                                    <h4>Kahvilat jokaiseen makuun</h4>
+                                    <p>
+                                        Olitpa sitten perinteisen kahvilan ystävä, modernin kahvibaarin etsijä tai
+                                        tunnelmallisen pienen kahvilan suosija, Suomesta löydät varmasti oman
+                                        suosikkisi. Kahvilat tarjoavat paitsi herkullisia kahveja ja leivonnaisia, myös
+                                        ainutlaatuisia tunnelmia ja miljöitä.
+                                    </p>
+                                </section>
+
+                                <section>
+                                    <h4>Suomessa sijaitsevia kahvilaketjuja</h4>
+                                    <p>
+                                        Suomessa on useita suosittuja kahvilaketjuja, jotka tarjoavat kahvia ja muita
+                                        herkkuja ympäri maata. Näitä ovat esimerkiksi:
+                                    </p>
+                                    <ul>
+                                        <a href="https://fi.espressohouse.com/">
+                                            <li><strong>Espresso house:</strong>
+                                        </a> Tunnettu kahvilaketju, joka tarjoaa laajan valikoiman kahveja, leivonnaisia
+                                        ja muita herkkuja.</li>
+                                        <a href="https://www.fazer.fi/fazer-cafe/">
+                                            <li><strong>Fazer Café:</strong>
+                                        </a> Yksi Suomen suurimmista kahvilaketjuista, joka tarjoaa kahvin lisäksi myös
+                                        muita ruokia ja juomia</li>
+                                        <a href="https://www.starbucks.com/">
+                                            <li><strong>Starbucks:</strong>
+                                        </a> Yhdysvaltalainen kahvilaketju, joka on tullut suosituksi myös Suomessa.
+                                        </li>
+                                    </ul>
+                                </section>
+                                <section>
+                                    <p>
+                                        Suosittujen kahvilaketjujen lisäksi Suomessa on lukuisia pienempiä kahviloita,
+                                        jotka takaavat yhdessä isompien ketjujen kanssa, ettet varmasti jää ilman
+                                        kahvikuppia kävellessäsi kaupunkien kaduilla!
+                                        Keräsimme alle kartan <strong>Helsingin keskustassa sijaitsevista
+                                            kahviloista</strong>, jotta pääset varmasti alkuun kahviloiden tutkimisessa.
+                                    </p>
+                                </section>
+                            </div>
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3969.5803178211954!2d24.94355584745727!3d60.167654022252904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1skahvila!5e0!3m2!1sfi!2sfi!4v1740576125510!5m2!1sfi!2sfi"
+                                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+
+                    </div>
+                </div>
+        </section>
+    </div>`;
 
 
-        var yhteystiedotHTML = ``;
+        var yhteystiedotHTML = `
+        <div class="container-fluid">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="row">
+                <div class="hero-image">
+                    <img src="assets/img/mockup.jpg" class="img-fluid" alt="wood">
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Content Section -->
+        <section class="content py-5">
+
+            <div class="container mt-5 padding2">
+                <div class="row">
+                    <div id="BrCr">
+                        <nav aria-label="breadcrumb">
+
+                        </nav>
+                    </div>
+
+                    <div class="col-12">
+                        <h2 class="fw-bold"> Yhteystiedot</h2>
+
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="container content-section">
+                        <div class="row align-items-start">
+                            <div class="text-content">
+                                <section>
+                                    <p>Kaikkeen sivustoon liittyvään pyri olemaan yhteydessä sivujen kehittäjään
+                                        sähköpostitse: kehittäjä@sähköposti.fi<BR>
+                                        Sivuilla ei ole muita ylläpitäjiä.
+                                    </p>
+                                </section>
+
+                                <section>
+                                    <h4>Kehittäjä</h4>
+                                    <p>
+                                        Marjut Jussila<br>
+                                        Katuosoite 12 A, <br>
+                                        00000 PAIKKAKUNTA <br>
+                                        p. 02 123 123 <br>
+                                        kehittäjä@sähköposti.fi
+                                    </p>
+                                </section>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+        </section>
+    </div>`;
 
 
         var indexBrCrHTML = `
@@ -771,7 +913,7 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li>Olet nyt:&nbsp;</li>
-        <li class="breadcrumb-item"><a href="#" onclick="textChange(0)">Etusivu</a></li>
+        <li class="breadcrumb-item"><a class="violet" href="#" onclick="textChange(0)">Etusivu</a></li>
         <li class="breadcrumb-item active" aria-current="page">Yhteystiedot</li>
     </ol>
 </nav>`;
