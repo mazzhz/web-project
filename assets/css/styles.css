@@ -124,6 +124,7 @@ a {
 body {
     margin: 0;
     font-family: Arial, sans-serif;
+    background: url('../img/bg.png') repeat top left;
 }
 
 h1 {
@@ -140,7 +141,7 @@ h1 {
 /*============  Header ===============*/
 .full-header {
     background-color: var(--light-brown);
-    padding: 3rem 0;
+    
     border-bottom: #d4c9af 2px solid;
 }
 
@@ -177,6 +178,7 @@ h1 {
     text-align: center;
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.12);
     border-bottom: var(--container-color) 1px solid;
+    background-color: #fff;
 }
 
 
@@ -262,7 +264,7 @@ h1 {
     clip-path: inset(0px -24px -24px -24px);
     padding-left: 0% !important;
     padding-right: 0% !important;
-    padding-bottom: 10%;
+    padding-bottom: 5%;
 }
 
 .container {
